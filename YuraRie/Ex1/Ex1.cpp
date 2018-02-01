@@ -6,11 +6,28 @@ void toFizzBuzz(unsigned int value);
 
 
 int main(){
+
+    std::cout << "\n===Unit1===\n";
     for(int i = 1;i <= 100 ; ++i)
         toFizzBuzz(i);
+    std::cout << "\n";
+
+    std::cout << "\n===Unit2===\n";
+
+
+    std::cout << "\n===Unit3===\n";
+    
+    
+    std::cout << "\n===Unit4===\n";
+    
+    
+    std::cout << "\n===Unit5===\n\n\n";
+
+    
     return 0;
 }
 
+//ループと割り算系のものを使わない縛りのFizzBuzz
 inline void toFizzBuzz(unsigned int value) {
     unsigned int value3(value), value5(value), value5_m(value);
     bool b3(0), b5(0);
@@ -34,7 +51,7 @@ inline void toFizzBuzz(unsigned int value) {
     b5 = ((0x842108421 >> shift) & 1 );
     //out
     if(b3|b5)
-        std::cout << (b3?"Fizz":"") << (b5?"Buzz":"") << '\n';
+        std::cout << (b3?"Fizz":"") << (b5?"Buzz":"") << ' ';
     else
-        std::cout << value << '\n';
+        std::cout << value << ' ';
 }
