@@ -1,9 +1,13 @@
 
 #include <iostream>
+#include <vector>
+#include <random>
 
 //Function prototype
 void toFizzBuzz(unsigned int value);
 
+template<typename T>
+bool swap_X(T* a,T* b);
 
 int main(){
 
@@ -13,16 +17,34 @@ int main(){
     std::cout << "\n";
 
     std::cout << "\n===Unit2===\n";
+    int a = 1, b = 2;
+    std::cout << "a=" << a << " ";
+    std::cout << "b=" << b << "\n";
+    swap_X(&a, &b);
+    std::cout << "a=" << a << " ";
+    std::cout << "b=" << b << "\n";
 
 
     std::cout << "\n===Unit3===\n";
-    
-    
-    std::cout << "\n===Unit4===\n";
-    
-    
-    std::cout << "\n===Unit5===\n\n\n";
+    std::vector<int> vec(10);
+    std::random_device rnd;
+    for(auto it = vec.begin();it != vec.end();it++){
+        *it = rnd()%10;
+    }
+    for(auto it: vec)
+        std::cout << it << " ";
+    std::cout << "\n";
 
+    vec.push_back(rnd()%10);
+    vec.push_back(rnd()%10);
+    for(auto it: vec)
+        std::cout << it << " ";
+    std::cout << "\n";
+
+
+    std::cout << "\n===Unit4===\n";
+    std::cout << "予想結果" << "\n";
+    std::cout << "2 , 3\n4 , 5\n23\n";
     
     return 0;
 }
@@ -55,3 +77,16 @@ inline void toFizzBuzz(unsigned int value) {
     else
         std::cout << value << ' ';
 }
+
+//swap
+template<typename T>
+bool swap_X(T* a,T* b)
+{
+    T temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+    return 0;
+}
+
+
