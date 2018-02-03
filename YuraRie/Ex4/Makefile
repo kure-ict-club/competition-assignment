@@ -2,7 +2,7 @@
 
 PROGRAM_NAME := $(shell basename `pwd`)
 CMD := g++
-CMD_OPTION := -O2 -lm
+CMD_OPTION := -O2 -lm -std=c++14
 RM := rm
 
 OUT_DIR := out
