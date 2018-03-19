@@ -24,11 +24,15 @@ void findPrimeNum(std::vector<int>& primeNums) {
 }
 
 int rad(int num) {
-	std::vector<int> primeNums;
+	static bool called  = false;
+	static std::vector<int> primeNums;
+	if (!called) {
+		findPrimeNum(primeNums);
+		called = true;
+	}
 	std::vector<int> factors;
 	bool added = false;
 	int ans = 1;
-	findPrimeNum(primeNums);
 	for (unsigned int i = 0; i < primeNums.size(); ++i) {
 		if (num % primeNums[i] == 0) {
 			num /= primeNums[i];
@@ -67,8 +71,7 @@ int main() {
 			if (gcd(a, b) == 1) {
 				int c = a + b;
 				if (q(a, b, c) > 1) {
-					std::cout << a << "," << b << "," << c << std::endl;
-					std::cout << q(a, b, c) << std::endl;
+					std::cout << a << "," << b << "," << c << ":" << q(a, b, c) << std::endl;
 				}
 			}
 		}
