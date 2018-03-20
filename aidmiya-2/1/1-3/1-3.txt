@@ -1,0 +1,74 @@
+[1] その3
+<1 vector> http://vivi.dyndns.org/tech/cpp/vector.html#vector
+　vectorは、配列の要素数をコントロールできる動的配列を作り、使うためのクラス。
+(1) 準備
+  #include <vector>
+  using namespace std;
+(2) 宣言・初期化
+  vector<int> data;                 // int型のdataという動的配列(オブジェクト)を宣言
+  vector<int> data(123);            // 123要素
+  vector<int> data(123, 5);         // 123要素、初期値5
+  vector<int> data_copy(data);      // 配列のコピー
+  vector<vector<int> > vv{{1, 2, 3}, {1, 2, 3}};
+
+  int moto[] = {4, 6, 5};
+  vector<int> data(moto, moto+3);   // 配列から初期化
+(3) 代入
+  b = a;                            // vector同士なら可能
+  a.assign(&ar[0], &ar[3]);         // 配列を代入
+  a.assign(3, 1);                   // {1, 1, 1}になる
+(4) 値の参照・代入
+  a[3] = 3;
+  a.at(3) = 3;
+・イテレータ…ポインタ
+  vector<int>::iterator itr = a.begin();  // begin()は最初、last()は最後の要素を示すイテレータ
+  *itr = 9;   // イテレータの指すa[0]を9に
+  itr++;      // イテレータの指す要素をインクリメント
+(5) データの追加
+  a.push_back(123);                 // 末尾に123を追加
+  a.insert(a.begin() + 3, 値);        // イテレータbegin()から3番目に値を挿入{3, 3, 3, 7, 3}
+(6) データの削除
+  a.pop_back();                     // 末尾を削除
+  a.erase(a.begin() + 3);           // 3番めを削除
+  a.erase(a.begin() + 2, a.begin() + 6);  // 2番めから6番目までを削除
+(7) そのほか
+  bool ae = a.empty();              // aが空なら1を返す
+  size_t型 a.size();                         // sizeofの代わり
+  size_t型 a.capacity();            // sizeofより多めにとられた、実際の要素数
+  a.front() ,   a.back()            /// 最初と最後の要素(イテレータだと.begin(),.last())
+  a.clear();                        // メモリを解放せずにすべての値を0にする
+  a.resize(サイズ);                  // 要素数の変更
+  a.reserve(サイズ);                 // capacityの設定
+  a.swap(b);
+  a.shrink_to_fit();                // capacityをsizeぴったりにする
+  vector<int>().swap(v);            // メモリ解放
+
+<2 乱数> http://www7b.biglobe.ne.jp/~robe/cpphtml/html01/cpp01075.html
+(1) 準備
+  #include <stdlib.h>
+  #include <time.h>   // (3)で必要
+  using namespace std;
+(2) rand():擬似乱数
+  たぶんint型のrand()により、毎回同じになる乱数が作れる。範囲は0〜RAND_MAXで、%Aで、0〜(A-1)に変換できるが、一様でない。
+(3) srand():初期化
+  time_t型のtime(NULL)が現在の時間を返す。これをunsigned intにキャスト変換する。時間として使うには、他の関数があるらしい(http://www9.plala.or.jp/sgwr-t/lib/time.html)。
+  srand(値)で、rand()のもととなる初期値を設定する。
+
+例
+---
+srand((unsigned int) time(NULL));
+---
+
+// ここから先はコンパイラのせいか試せず
+<2 乱数> http://vivi.dyndns.org/tech/cpp/random.html
+(1) 準備
+  #include <random>
+  using namespace std;
+(2) 決定的な乱数生成器…早いが擬似乱数
+  random_service rnd;
+  mt19937 mt(rnd());        // mt19937_64だと32ではなく64bit版
+    // mt()で生成される
+(3) 非決定的な乱数生成器…遅いが高品質
+  random_device rnd;
+  // rnd()で生成される
+

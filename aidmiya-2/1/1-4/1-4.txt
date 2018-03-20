@@ -1,0 +1,116 @@
+[1] その4
+<1 オブジェクト指向>
+　オブジェクト指向は、さまざまなものを物体として考えるプログラミング手法である。
+(1) メソッド(関数)とメンバ(変数)を独自に持つ「クラス」とよばれる物体の形・設計図から、「インスタンス」という物体を何個でもつくり、それらの物体をメソッドを呼び出して動かしたりする。ただし、インスタンスだけが持つメンバもある。
+(2) 物体を種類ごとにまとめるなどして、クラス間に関係をつくるのが継承。スーパークラス・サブクラス・抽象クラスなど。
+
+<2 クラス> http://cpp-lang.sevendays-study.com/day3.html
+　クラスは物体のまとまりであり、自作の型ともいえる。クラスの宣言は次のようにして行う。publicはクラスの外からアクセスできるメソッドを入れ、privateにはクラス外からはアクセスできないようにする(カプセル化)ためにメンバを入れる。なお、メンバ変数を外部から変更したり取得するには、クラスにそれらをするためのpublicなメソッド(setter, getter)を作る。
+
+・コンストラクタ…インスタンス化したときに実行されるメソッド。CCar::CCar()のように宣言し、型はつけない。
+・デストラクタ…インスタンスをdeleteしたときやプログラムの最後に実行されるメソッド。CCar::~CCar()のように宣言し、型はつけない。
+
+---main.ccp
+#include <iostream>
+#include "CCar.h"
+using namespace std;
+
+int main() {
+  // 生成と消去を明記せず、静的にインスタンス化
+  CCar car1;
+  cout << "car1の燃料: " << car1.getFuel() << endl;
+  car1.run();
+  cout << "car1の燃料: " << car1.getFuel() << endl;
+
+  // 生成=newと消去=deleteを明記して、動的にインスタンス化
+  //CCar* car2;
+  CCar* car2 = new CCar;
+  car2->run();
+  cout << "car2の燃料: " << car2->getFuel() << endl;
+  delete car2;
+
+  // ゲッターとセッターを使う
+  CCar car3(500);
+  cout << "car3の燃料: " << car3.getFuel() << endl;
+  car3.run();
+  cout << "car3の燃料: " << car3.getFuel() << endl;
+  car3.setFuel(car3.getFuel() + 300);
+  cout << "car3の燃料: " << car3.getFuel() << endl;
+  return 0;
+}
+---CCar.h
+#ifndef __CCAR_H__
+#define __CCAR_H__
+
+class CCar {
+  public:
+    CCar();
+    CCar(int);
+    ~CCar();
+    void run();
+    int getFuel();
+    void setFuel(int);
+  private:
+    int fuel;
+};
+
+#endif
+---CCar.cpp
+#include <iostream>
+#include "CCar.h"
+using namespace std;
+
+CCar::CCar() {      // 型なし
+  // int fuel = 200;
+  fuel = 200;
+  cout << "新車の燃料は" << fuel << "あります" << endl;
+}
+CCar::CCar(int value) {// 型なし
+  // int fuel = value;
+  fuel = value;
+  cout << "新車の燃料は" << fuel << "あります" << endl;
+}
+CCar::~CCar() {     // 型なし
+  cout << "燃料が" << fuel << "残っていますが、廃車です。" << endl;
+  cout << "廃車" << endl;
+}
+
+void CCar::run() {
+  fuel -= 100;
+  cout << "走ったので燃料が100減り、" << fuel << "になりましたよ" << endl;
+}
+int CCar::getFuel() {
+  return fuel;
+}
+void CCar::setFuel(int value) {
+  cout << "燃料を" << value << "に設定しました" << endl;
+  fuel = value;
+}
+---
+
+失敗したら
+・ゲッターが不定値を返す…ヘッダファイルだけでいいのに、cppでもコンストラクタで宣言してない?
+・「memory map」が出た…deleteだけ書いてnewを書いてない
+
+<2 クラスのファイル分割>
+・main.cpp…main関数、CCar.hへのインクルード
+・CCar.h…classの宣言(publicでメソッド、privateでメンバの定義)
+・CCar.cpp…メソッドの内容、CCar.hへのインクルード(メンバの宣言はhで済ませている)
+
+<3 補足>
+・コンストラクタのメンバ初期化方法を簡単にしよう(http://d.hatena.ne.jp/gununu/20131012/1381578689)
+---CCar.hの一部(さっきの改変)
+CCar::CCar() : fuel(200) {
+  cout << "新車の燃料は" << fuel << "あります" << endl;
+}
+CCar::CCar(int value) : fuel(value) {
+  cout << "新車の燃料は" << fuel << "あります" << endl;
+}
+---
+・const 型&…左辺値参照(http://d.hatena.ne.jp/gununu/20131012/1381578689)(http://docwiki.embarcadero.com/RADStudio/Berlin/ja/%E5%B7%A6%E8%BE%BA%E5%80%A4%E5%8F%82%E7%85%A7%EF%BC%88C%2B%2B%EF%BC%89)
+
+
+1-4の予想(正解)
+2 , 3
+4 , 5
+23

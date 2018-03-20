@@ -1,0 +1,97 @@
+[2] その2
+<1 ポインタ> http://c-lang.sevendays-study.com/ex-day2.html
+　ポインタ変数は、アドレスを参照することで、参照先のアドレスにある変数に変身できる変数である。
+(1) 表記方法
+・ポインタ変数…ポインタ変数aに代入して宣言するときは「int *a = &num;」のようにするが、使うときには*は不要(普通の変数と同じように扱う)。そのため「int* a;」のように宣言する人もいる。使うときは「a = &num;」でよい。初期化は「NULL」が慣習。宣言済みのポインタ変数aを「*a」と書くと、ポインタ変数の参照先を表す。「*a = 200;」とすると、int *a = &num;と宣言されていた場合、numもaも200になる。
+・アドレス…変数numのアドレスは&numと表す。
+(2) ポインタと関数
+・関数の引数をポインタ型(int*など、プロトタイプ宣言でもこう書ける)にすると、関数の外部の変数を書き換えることができる。
+
+例
+---
+#include <iostream>
+using namespace std;
+
+void swap(int*, int*);
+void put(int, int);
+
+int main() {
+  int a = 42;
+  int b = 3;
+  put(a, b);
+  swap(&a, &b);
+  put(a, b);
+  return 0;
+}
+
+void swap(int* p1, int* p2) { // int* p1 = &a;であり、int* p2 = &b;である
+  int tmp = *p1;              // int tmp = a;とは書けないが、p1とp2がポインタ変数でなければ、int tmp = p1;と書ける
+  *p1 = *p2;                  // *p1 = &bとすると、aにbのアドレスを書くことになる。関数内ではa = b;と書けない。
+  *p2 = tmp;                  // もとの*p1(a)をtmpに入れていたので、*p2(b)にtmp。
+}
+void put(int a, int b) {
+  cout << "a=" << a << ", b=" << b << endl;
+}
+---
+
+
+<2 自作関数のファイル分割> http://c-lang.sevendays-study.com/day7.html
+　自作関数が多くなると、main関数のみを書きたいmain.cppが長くなってしまい、読みにくくなる。こういうとき、処理の内容などによってファイルを分ける方法は次のとおりである。
+(1) main.cpp…main関数と(2)のインクルード
+(2) 名前.h…インクルードガードと自作関数のプロトタイプ宣言
+(3) 名前.cpp…自作関数の中身と(2)のインクルード
+ただし、(2と(3)のファイル名は内容によって揃える。(3)のインクルードはしない(コンパイル時に指定するため)。
+
+ワード
+・インクルードガード…複数のcppファイルにそれぞれhファイルを#includeする指令が書かれるとき、二重定義を防ぐための方法。
+　・#ifndef A…Aが定義されていなかったら#endifまでを読む。(if not define)
+　・#define A…Aを定義する。
+　・利用方法
+    #ifndef __FAIL_H__
+    #define __FAIL_H__
+    void circle(int r);
+    #endif
+
+例
+---main.cpp
+#include <iostream>
+#include "calc.h"
+
+using namespace std;
+
+int main() {
+  int sum = sum(-3, 8);
+  return 0;
+}
+
+---calc.h
+#ifndef __CALC_H__
+#deifne __CALC_H__
+
+int sum(int a, int b);
+
+#endif
+
+---calc.cpp
+#include "calc.h"
+
+int sum(int a, int b) {
+  int s;
+  s = a + b;
+  cout << a << " + " << b << " = " << s << endl;
+  return sum;
+}
+---
+
+ポイント
+・分割コンパイル…G++で複数ファイルをコンパイルするためには、次の手順を踏む。
+(1) オブジェクトファイルをcppごとに作る…$ g++ -c ファイルx.cpp ( -o ファイルx.o )
+(2) オブジェクトファイルから実行ファイル(リンク)…$ g++ ファイル1.o ファイル2.o …
+・makefileに依存関係を書く…「$ make」のみでコンパイルできるようになる。でも下の書き方で合っているのかわからない
+---makefile
+# swap
+a.out : main.cpp swap.cpp
+	g++ main.o swap.o
+---
+http://omilab.naist.jp/~mukaigawa/misc/Makefile.html
+

@@ -1,0 +1,47 @@
+[1] その1
+<自作関数> http://c-lang.sevendays-study.com/day6.html
+　自作関数を使うためには、最低三箇所に次のことをそれぞれ記述する。
+(1)プロトタイプ宣言…main関数の後ろに関数の中身を書く場合に必要となる。プリプロセッサ指令の直後に書き、作成した関数の戻り値や引数の書式を宣言する。
+(2)呼び出し…main関数や自作関数の中で、関数名や引数を書いて呼び出す。
+(3)中身…引数を受け取り、返り値を返す内容を記述。
+
+ワード
+・関数…一連の動作を行うまとまり。同じ作業を何度も行うときには、外部に関数を書いて呼び出すことで見やすくなる。
+・引数…関数が呼び出し元から渡され(受け取)る、関数での作業に影響するデータ。
+・返り値(戻り値)…一連の動作を終えて、結果などを返す。
+
+ポイント
+・G++でのコンパイル方法: $ g++ main.cpp -o main
+・実行方法: ./main
+・関数名は動作の内容に
+
+例
+---
+#include <iostream>
+using namespace std;
+int sum(int a, int b);
+// int sum(int, int);も可
+void print(void);
+
+int main() {
+  print();
+  int vala = 5;
+  int valb = 8;
+  int s = sum(vala, valb);
+  cout << s << endl;
+  int s = sum(s, valb);
+  cout << s << endl;
+  print();
+  return 0;
+}
+
+int sum(int a, int b) {
+  int sum;
+  sum = a + b;
+  cout << a << "+" << b << endl;
+  return sum;
+}
+void print() {
+  cout << "とりあえず" << endl;
+}
+---

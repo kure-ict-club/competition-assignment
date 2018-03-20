@@ -1,0 +1,23 @@
+[2]
+<1 参照渡し>(http://cpp-lang.sevendays-study.com/ex-day1.html)
+　参照渡しは、引数の受け取り方で、「値渡し」(例: func(int a))、「ポインタ渡し」(例: func(int* a))とは違い、新しいアドレスを割り振らずに直接、他のアドレスを参照し、関数外の変数を書き換える方法。値渡しではできないがポインタ渡しではできる、呼び出し元の自動変数の書き換えも可能。
+　constをつけると、関数の中でその変数を変えないことを明示する。
+
+
+<2 演算子のオーバーロード>(https://msdn.microsoft.com/ja-jp/library/5tk49fh2.aspx#%E5%8F%82%E7%85%A7)(http://www.ced.is.utsunomiya-u.ac.jp/lecture/2012/prog/p3/kadai2/page3.php)
+　演算子のオーバーロードは次のような構文で行う。
+  型 operator 演算子(引数)
+例
+CCalc operator +(CCalc& 変数); // 宣言(classのh内)
+// 中身
+CCalc CCalc::operator +(CCalc& へんすう) {
+  return 計算など
+}
+o1 = o3 + o2;// main関数内で実際に使うとき。o3がo2を引数として、呼び出している。このときo1, o2, o3はCCalc型(CCalcクラス)でないと、処理ができない。
+
+ワード
+・オーバーロード…関数などを、同じ名称で多重に定義すること。例えば、引数の数や型などで(int,boolの引数、intだけの引数など)別々の動作を定義することができる。
+
+
+<3 ストリーム>
+
