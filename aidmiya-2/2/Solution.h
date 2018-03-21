@@ -3,20 +3,15 @@
 
 class Solution {
   public:
-    Solution() = default;
-    Solution(int _x, int _y)
-      : x(_x)
-      , y(_y)
-    {
-    }
-    CoincideWith'(const Equation& other) const;
+    Solution() = default;     // 引数なしのデフォルトコンストラクタ
+    Solution(int _x, int _y) : x(_x), y(_y) {}
+    // /* void */CoincideWith'(const Equation& other) const;
+    void CoincideWith(const Equation& eq1, const Equation& eq2) const;
+//    std::ostream& operator <<(std::ostream& stream, const Solution& value);
     int x;
     int y;
 };
-
-std::ostream& operator<<(std::ostream& stream, const Solution& value) {
-  return stream << '(' << value.x << "," << value.y << ')';
-}
+    std::ostream& operator <<(std::ostream& stream, const Solution& value);
 
 #endif
 
