@@ -8,7 +8,7 @@ ostream& operator<<(ostream& stream, const Solution& value) {
 }
 
 // void Solution::CoincideWith'(const Equation& other) const {
-void Solution::CoincideWith(const Equation& eq1, const Equation& eq2) const {
+void Solution::CoincideWith(const Equation& eq1, const Equation& eq2)/* const*/ {
   // x = \frac{pd-bq}{ad-bc}
   // y = \frac{aq-pc}{ad-bc}
   // a = eq1.a , b = eq1.b , p = eq1.p, c = eq2.a, d = eq2.b , q = eq2. p

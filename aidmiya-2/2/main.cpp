@@ -12,7 +12,7 @@ int main() {
   int a, b, p, c, d, q;
 
   // 式の入力・設定・表示
-  a = 2;  b = 3;  p = 1;  c = 3;  d = 5;  q = 11;  // x=2, y=-1
+  a = 2;  b = 3;  p = 1;  c = 3;  d = -5;  q = 11;  // x=2, y=-1
 
   cout << "代入したa, b, p, c, d, qを表示します。" << endl;
   cout << "式1: " << a << "x + " << b << "y = " << p << endl;
@@ -36,6 +36,9 @@ int main() {
   Solution ans;
   ans.CoincideWith(eq1, eq2);
   // 表示
+  cout << "答えは  ";
+  //  cout << ans << endl; まだ使わない
+  cout << "(" << ans.x << ", " << ans.y << ")" << endl;
 
   return 0;
 }

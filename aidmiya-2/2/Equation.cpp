@@ -33,6 +33,7 @@ Equation Equation::operator /(double s) const {
   return Equation( a/s, b/s, p/s );
 }
 
+/* 未実装
 // 演算子+= a+=b -> a=a+b
 // 使用例 eq1 += eq2;       ...eq1 = eq1 + eq2;
 Equation& Equation::operator +=(const Equation& other) {
@@ -43,4 +44,5 @@ Equation& Equation::operator +=(const Equation& other) {
 Equation& Equation::operator -=(const Equation& other) {
   return Equation( a - other.a , b - other.b , p - other.p );
 }
+*/
 
