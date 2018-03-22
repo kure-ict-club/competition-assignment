@@ -9,9 +9,7 @@ public:
     
     Vector3D() {}
     Vector3D(int _x, int _y, int _z)
-        : x(_x)
-        , y(_y)
-        , z(_z)
+        : x(_x), y(_y), z(_z)
     {
     }
 };
@@ -21,11 +19,11 @@ ostream& operator<<(ostream& stream, const Vector3D& value){
 }
 
 template <typename Type>
-void swap(Type *a, Type *b)
+void Swap(Type *a, Type *b)
 {
-    Type tmp = *a;
-    *a = *b;
-    *b = tmp;
+    Type tmp = std::move(*a);
+    *a = std::move(*b);
+    *b = std::move(tmp);
 }
 
 int main()
@@ -36,7 +34,7 @@ int main()
     cout << a << endl;
     cout << b << endl;
     
-    swap(a, b);
+    Swap(&a, &b);
     
     cout << a << endl;
     cout << b << endl;
@@ -50,11 +48,11 @@ int main()
 
 # include <iostream>
 
-void swap(int *a, int *b)
+void Swap(int *a, int *b)
 {
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
+    int tmp = std::move(*a);
+    *a = std::move(*b);
+    *b = std::move(tmp);
 }
 
 int main()
@@ -66,7 +64,7 @@ int main()
     std::cout << "a = " << a << std::endl;
     std::cout << "b = " << b << std::endl;
     
-    swap(&a, &b);
+    Swap(&a, &b);
     
     std::cout << "a = " << a << std::endl;
     std::cout << "b = " << b << std::endl;
