@@ -84,7 +84,7 @@ struct Vector2D
 	/// <summary>
 	/// 内積
 	/// </summary>
-	/// <param name="vev">
+	/// <param name="vec">
 	/// 2次元ベクトル
 	/// </param>
 	/// <returns>
@@ -98,7 +98,7 @@ struct Vector2D
 	/// <summary>
 	/// 外積
 	/// </summary>
-	/// <param name="vev">
+	/// <param name="vec">
 	/// 2次元ベクトル
 	/// </param>
 	/// <returns>
