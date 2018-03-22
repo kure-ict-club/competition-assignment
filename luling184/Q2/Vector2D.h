@@ -10,7 +10,7 @@ struct Vector2D
 	Type x, y;
 
 	/// <summary>
-	/// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	/// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	/// </summary>
 	Vector2D() = default;
 
@@ -82,13 +82,13 @@ struct Vector2D
 
 
 	/// <summary>
-	/// “àÏ
+	/// å†…ç©
 	/// </summary>
 	/// <param name="vev">
-	/// 2ŸŒ³ƒxƒNƒgƒ‹
+	/// 2æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«
 	/// </param>
 	/// <returns>
-	/// “àÏ‚Ì’l
+	/// å†…ç©ã®å€¤
 	/// </returns>
 	constexpr Type dot(const Vector2D& vec) const
 	{
@@ -96,13 +96,13 @@ struct Vector2D
 	}
 
 	/// <summary>
-	/// ŠOÏ
+	/// å¤–ç©
 	/// </summary>
 	/// <param name="vev">
-	/// 2ŸŒ³ƒxƒNƒgƒ‹
+	/// 2æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«
 	/// </param>
 	/// <returns>
-	/// ŠOÏ‚Ì’l
+	/// å¤–ç©ã®å€¤
 	/// </returns>
 	constexpr Type cross(const Vector2D& vec) const
 	{
@@ -110,10 +110,10 @@ struct Vector2D
 	}
 
 	/// <summary>
-	/// 2ŸŒ³ƒxƒNƒgƒ‹‚Ì‘å‚«‚³
+	/// 2æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•
 	/// </summary>
 	/// <returns>
-	/// 2ŸŒ³ƒxƒNƒgƒ‹‚Ì‘å‚«‚³
+	/// 2æ¬¡å…ƒãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•
 	/// </returns>
 	constexpr Type length() const
 	{
@@ -121,10 +121,10 @@ struct Vector2D
 	}
 
 	/// <summary>
-	/// ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚Ì2æ
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã®2ä¹—
 	/// </summary>
 	/// <returns>
-	/// ƒxƒNƒgƒ‹‚Ì‘å‚«‚³‚Ì2æ
+	/// ãƒ™ã‚¯ãƒˆãƒ«ã®å¤§ãã•ã®2ä¹—
 	/// </returns>
 	constexpr Type lengthSquare() const
 	{
@@ -132,10 +132,10 @@ struct Vector2D
 	}
 
 	/// <summary>
-	/// —ëƒxƒNƒgƒ‹‚Å‚ ‚é‚©‚Ç‚¤‚©
+	/// é›¶ãƒ™ã‚¯ãƒˆãƒ«ã§ã‚ã‚‹ã‹ã©ã†ã‹
 	/// </summary>
 	/// <returns>
-	/// —ëƒxƒNƒgƒ‹‚Å‚ ‚é‚©‚Ç‚¤‚©
+	/// é›¶ãƒ™ã‚¯ãƒˆãƒ«ã§ã‚ã‚‹ã‹ã©ã†ã‹
 	/// </returns>
 	constexpr bool isZero() const
 	{

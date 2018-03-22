@@ -18,7 +18,7 @@ public:
 
 	void bark(int value) const
 	{
-		cout << "‚í‚ñ‚í‚ñ : " << m_num << endl;
+		cout << "ã‚ã‚“ã‚ã‚“ : " << m_num << endl;
 	}
 
 private:
@@ -35,7 +35,7 @@ public:
 	}
 	void run(int value) const
 	{
-		cout << m_num << "Žü‘–‚é‚É‚á[" << endl;;
+		cout << m_num << "å‘¨èµ°ã‚‹ã«ã‚ƒãƒ¼" << endl;;
 	}
 
 private:
@@ -76,7 +76,7 @@ int main()
 
 	onOpenDoorHandler.set(std::bind(&Dog::bark, &dog, std::placeholders::_1));
 	onOpenDoorHandler.set(std::bind(&Cat::run, &cat, std::placeholders::_1));
-	
+
 	int value = 0;
 	onOpenDoorHandler(value);
 
