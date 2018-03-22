@@ -9,7 +9,6 @@ struct Vector2D
 
 	Type x, y;
 
-		
 	/// <summary>
 	/// デフォルトコンストラクタ
 	/// </summary>
@@ -22,15 +21,15 @@ struct Vector2D
 	template <class U, class V>
 	constexpr Vector2D(U _x, V _y)
 		: x(static_cast<Type>(_x))
-		, y(static_cast<Type>(_y)) 
+		, y(static_cast<Type>(_y))
 	{}
 
 	template <class U>
 	constexpr Vector2D(const Vector2D<U> &vec)
 		: x(static_cast<Type>(vec.x)), y(static_cast<Type>(vec.y))
 	{}
-	
-	
+
+
 	constexpr Vector2D operator +() { return *this; }
 
 	constexpr Vector2D operator -() { return{ -x, -y }; }
@@ -81,7 +80,7 @@ struct Vector2D
 	constexpr bool operator < (const Vector2D& vec) const { return (lengthSquare() <  vec.lengthSquare()); }
 	constexpr bool operator <=(const Vector2D& vec) const { return (lengthSquare() <= vec.lengthSquare()); }
 
-	
+
 	/// <summary>
 	/// 内積
 	/// </summary>
@@ -146,7 +145,7 @@ struct Vector2D
 
 template <class Type>
 std::ostream& operator<<(std::ostream& stream, const Vector2D<Type>& vec) {
-	return stream << '(' << vec.x << ", " << vec.y << ')';
+	return stream << "(" << vec.x << ", " << vec.y << ")";
 }
 
 # endif // _VECTOR2D_
