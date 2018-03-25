@@ -1,60 +1,59 @@
-// /* ƒeƒ“ƒvƒŒ[ƒg‚ğg‚Á‚½—á
+// /* ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆã‚’ä½¿ã£ãŸä¾‹
+
 # include <iostream>
+
 using namespace std;
 
-class Vector3D
+struct Vector3D
 {
-public:
     int x, y, z;
-    
+
     Vector3D() {}
     Vector3D(int _x, int _y, int _z)
-        : x(_x)
-        , y(_y)
-        , z(_z)
+        : x(_x), y(_y), z(_z)
     {
     }
 };
-    
+
 ostream& operator<<(ostream& stream, const Vector3D& value){
-    return stream << '(' << value.x << "," << value.y << "," << value.z <<')';
+    return stream << "(" << value.x << ", " << value.y << ", " << value.z << ")";
 }
 
 template <typename Type>
-void swap(Type *a, Type *b)
+void Swap(Type *a, Type *b)
 {
-    Type tmp = *a;
-    *a = *b;
-    *b = tmp;
+    Type tmp = std::move(*a);
+    *a = std::move(*b);
+    *b = std::move(tmp);
 }
 
 int main()
 {
     Vector3D a(1, 2, 3);
     Vector3D b(4, 5, 6);
-    
+
     cout << a << endl;
     cout << b << endl;
-    
-    swap(a, b);
-    
+
+    Swap(&a, &b);
+
     cout << a << endl;
     cout << b << endl;
-    
+
     return 0;
 }
 
 //*/
 
-/* intŒ^‚Ì‚İ‚É‘Î‰
+/* intå‹ã®ã¿ã«å¯¾å¿œ
 
 # include <iostream>
 
-void swap(int *a, int *b)
+void Swap(int *a, int *b)
 {
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
+    int tmp = std::move(*a);
+    *a = std::move(*b);
+    *b = std::move(tmp);
 }
 
 int main()
@@ -62,15 +61,15 @@ int main()
     int a, b;
     a = 10;
     b = 20;
-    
+
     std::cout << "a = " << a << std::endl;
     std::cout << "b = " << b << std::endl;
-    
-    swap(&a, &b);
-    
+
+    Swap(&a, &b);
+
     std::cout << "a = " << a << std::endl;
     std::cout << "b = " << b << std::endl;
-    
+
     return 0;
 }
 
