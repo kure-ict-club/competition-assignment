@@ -48,10 +48,10 @@ public:
    }
 
    void bubbleSort() {
-      for (int i=0; i<sortData.size()-1; ++i) {
+      for (int i=0; i<size()-1; ++i) {
          bool hasSorted = false;
 
-         for (int j=0; j<sortData.size()-1-i; ++j) {
+         for (int j=0; j<size()-1-i; ++j) {
             if (sortData[j] > sortData[j+1]) {
                std::swap(sortData[j], sortData[j+1]);
                hasSorted = true;
@@ -60,6 +60,18 @@ public:
 
          if (hasSorted == false) return;
       }
+   }
+
+   void selectSort() {
+      for (int i=0; i<size()-1; ++i) {
+         int minIndex = i;
+         for (int j=i+1; j<size(); ++j) {
+            if (sortData[minIndex] < sortData[j]) {
+               minIndex = j;
+            } 
+         }
+         std::swap(sortData[i], sortData[minIndex]);
+      } 
    }
 
    std::vector<int> getDescenging() const {
@@ -83,7 +95,7 @@ int main() {
    Rearranger data(text.getStr(2), ' ');
 
    data.bubbleSort();
-   //rear.selectSort();
+   //data.selectSort();
 
    for (auto value : data.getAscending()) {
       std::cout << value << std::endl;
