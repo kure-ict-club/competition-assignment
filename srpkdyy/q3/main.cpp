@@ -7,44 +7,37 @@
 
 class Text {
 private:
-   int lineNum;
    std::vector<std::string> text;
 
 public:
-   Text(std::ifstream& readFile) : lineNum(0) {
+   Text(std::ifstream& readFile) {
       std::string buf;
-      while (getline(readFile, buf)) {
-         text.push_back(buf);
-         lineNum++;
-      }
+      while (getline(readFile, buf)) text.push_back(buf);
    }
 
    int lineCount() const {
-      return lineNum;
+      return text.size();
    }
 
-   std::string getStr(int line) {
+   std::string getLine(int line) const {
       return text[line];
    }
 
-   char getChar(int line, int row) {
+   char getChar(int line, int row) const {
       return text[line][row];
    }
 };
 
 class Rearranger {
-public:
+private:
+   bool isDescending;
    std::vector<int> sortData;
 
 public:
-   Rearranger(std::string data, char split) {
+   Rearranger(std::string data, char split) : isDescending(true) {
       std::stringstream ss { data };
       std::string buf;
       while(getline(ss, buf, split)) sortData.push_back(std::stoi(buf));
-   }
-
-   int size() const {
-      return sortData.size();
    }
 
    void bubbleSort() {
@@ -74,32 +67,60 @@ public:
       } 
    }
 
-   std::vector<int> getDescenging() const {
+   void setDescending() {
+      if (!isDescending) {
+         std::reverse(sortData.begin(), sortData.end());
+         isDescending = true;
+      }
+   }
+
+   void setAscending() {
+      if (isDescending) {
+         std::reverse(sortData.begin(), sortData.end());
+         isDescending = false;
+      }
+   }
+
+   int size() const {
+      return sortData.size();
+   }
+
+   std::vector<int> getSortedData() const {
       return sortData;
    }
 
-   std::vector<int> getAscending() const {
-      auto data = sortData;
-      std::reverse(data.begin(), data.end());
-      return data;
-   }
 };
 
 
 int main() {
-   std::ifstream ifs("inputdata.txt");
+   std::ifstream ifs("input.txt");
    if (ifs.fail()) return -1;
 
    Text text(ifs);
 
-   Rearranger data(text.getStr(2), ' ');
+   Rearranger data(text.getLine(2), ' ');
 
-   data.bubbleSort();
-   //data.selectSort();
 
-   for (auto value : data.getAscending()) {
-      std::cout << value << std::endl;
+   switch (text.getChar(0, 2)) {
+      case '0': data.bubbleSort(); break;
+      case '1': data.selectSort(); break;
+      default :                    break;
+
    }
+
+   switch (text.getChar(0, 0)) {
+      case '0': data.setAscending();  break;
+      case '1': data.setDescending(); break;
+      default :                       break;
+      
+   }
+    
+   
+   std::ofstream ofs("output.txt");
+
+   ofs << text.getLine(0);
+   for (const auto& value : data.getSortedData()) ofs << ' ' << value;
+
 
 	return 0;
 }
